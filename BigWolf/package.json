@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "WolfS02E01": "bun WolfS02E01/app.ts",
-    "WolfS02E02": "bun WolfS02E02/app.ts"
+    "WolfS02E02": "bun WolfS02E02/app.ts",
+    "WolfS02E03": "bun WolfS02E03/app.ts",
+    "WolfS02E04": "bun WolfS02E04/app.ts"
   },
   "keywords": [],
   "author": "",

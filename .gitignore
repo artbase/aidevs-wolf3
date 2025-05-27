@@ -9,3 +9,6 @@ package-lock.json
 przesluchania/
 pliki_z_fabryki/
 # End of Selection Selection
+.aider*
+.doc*
+.env

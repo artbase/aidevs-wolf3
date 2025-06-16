@@ -36,6 +36,46 @@ export class OpenAIService {
     }
   }
 
+  async getYearAnswer(question: string): Promise<number> {
+    const messages: ChatCompletionMessageParam[] = [
+      {
+        role: 'system',
+        content: 'You are to provide answers that are only a single number representing a year.'
+      },
+      {
+        role: 'user',
+        content: question
+      }
+    ];
+
+    try {
+      // Call the existing completion method
+      const response = await this.completion(
+        messages,
+        'gpt-4',
+        false,   // stream
+        false,   // jsonMode
+        10       // maxTokens (set low since the answer is short)
+      );
+
+      // Extract the assistant's reply
+      const answerText = response.choices[0].message.content.trim();
+
+      // Parse the answer to an integer
+      const year = parseInt(answerText, 10);
+
+      // Check if the parsed year is a valid number
+      if (isNaN(year)) {
+        throw new Error(`The assistant's response is not a valid number: "${answerText}"`);
+      }
+
+      return year;
+    } catch (error) {
+      console.error('Error in getYearAnswer:', error);
+      throw error;
+    }
+  }
+
   async createJinaEmbedding(text: string): Promise<number[]> {
     try {
       const response = await fetch('https://api.jina.ai/v1/embeddings', {

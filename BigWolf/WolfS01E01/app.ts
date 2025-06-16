@@ -6,10 +6,10 @@ import { WebSearchService } from '../Services/WebSearchService';
 async function main(): Promise<void> {
     const webSearchService = new WebSearchService();
     try {
-        const content = await webSearchService.scrapePage('https://example.com');
-        console.log('Scraped content:', content);
+        const question = await webSearchService.getQuestionFromSection('https://example.com');
+        console.log('Extracted question:', question);
     } catch (error) {
-        console.error('Failed to scrape page:', error);
+        console.error('Failed to get question:', error);
     }
 }
 

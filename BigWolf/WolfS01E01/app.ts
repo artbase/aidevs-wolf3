@@ -14,6 +14,15 @@ async function main(): Promise<void> {
     try {
         const question = await webSearchService.getQuestionFromSection('https://xyz.ag3nts.org');
         console.log('Extracted question:', question);
+
+        const pageContent = await webSearchService.scrapePage('https://xyz.ag3nts.org');
+        console.log('Scraped page content:', pageContent);
+
+        const questionEmbedding = await openAIService.createJinaEmbedding(question);
+        console.log('Question embedding:', questionEmbedding);
+
+        const pageEmbedding = await openAIService.createJinaEmbedding(pageContent);
+        console.log('Page content embedding:', pageEmbedding);
         
         const year = await openAIService.getYearAnswer(question);
         console.log(`The answer is: ${year}`);

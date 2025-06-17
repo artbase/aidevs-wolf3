@@ -12,7 +12,7 @@ async function main(): Promise<void> {
     const openAIService = new OpenAIService();
     
     try {
-        const question = await webService.getContentFromSection('https://xyz.ag3nts.org', '#human-question');
+        const question = await webService.getContentFromSection(process.env.XYZ_PAGE, '#human-question');
         console.log('Extracted question:', question);
         
         const year = await openAIService.getYearAnswer(question);
@@ -23,7 +23,7 @@ async function main(): Promise<void> {
             password: process.env.XYZ_PASSWORD,
             answer: year.toString(),
         };
-        const page = await webService.submitForm('https://xyz.ag3nts.org/', formData);
+        const page = await webService.submitForm(process.env.XYZ_PAGE, formData);
         console.log('Page:', page);
     } catch (error) {
         console.error('Failed to get answer:', error);

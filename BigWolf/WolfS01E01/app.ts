@@ -11,26 +11,17 @@ dotenv.config();
 async function main(): Promise<void> {
     const webSearchService = new WebSearchService();
     const openAIService = new OpenAIService();
+    const xyzService = new XYZService();
+    
     try {
         const question = await webSearchService.getQuestionFromSection('https://xyz.ag3nts.org');
         console.log('Extracted question:', question);
-
-        const pageContent = await webSearchService.scrapePage('https://xyz.ag3nts.org');
-        console.log('Scraped page content:', pageContent);
-
-        const questionEmbedding = await openAIService.createJinaEmbedding(question);
-        console.log('Question embedding:', questionEmbedding);
-
-        const pageEmbedding = await openAIService.createJinaEmbedding(pageContent);
-        console.log('Page content embedding:', pageEmbedding);
         
         const year = await openAIService.getYearAnswer(question);
         console.log(`The answer is: ${year}`);
-        
-        // Send the answer to the form
-        const xyzService = new XYZService();
-        const response = await xyzService.sendForm('tester', '574e112a', year.toString());
-        console.log('Form submission response:', response);
+
+        const page = await xyzService.sendForm(process.env.XYZ_USERNAME, process.env.XYZ_PASSWORD, year.toString());
+        console.log('Page:', page);
     } catch (error) {
         console.error('Failed to get answer:', error);
     }

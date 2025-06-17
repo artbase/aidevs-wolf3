@@ -1,5 +1,8 @@
 import { WebSearchService } from '../Services/WebSearchService';
 import { OpenAIService } from '../Services/OpenAIService';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 /**
  * Main application entry point

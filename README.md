@@ -2,6 +2,8 @@
 
 ```bash
 git log --graph --oneline --all --decorate
+
+npm run WolfS01E01
 ```
 
 ## Lessons
@@ -15,10 +17,27 @@ git log --graph --oneline --all --decorate
 - [WebSearch](https://github.com/i-am-alice/3rd-devs/tree/main/websearch)
 
 #### Linki do doczytania:
-- https://blog.langchain.dev/what-is-a-cognitive-architecture/
-- https://langfuse.com/
 - https://www.anthropic.com/news/prompt-caching
+
+### S01E02
+
+- [Completion-S00E04](https://github.com/i-am-alice/3rd-devs/tree/main/completion)
+- [Linear app](https://github.com/i-am-alice/3rd-devs/tree/main/linear)
+- [Files](https://github.com/i-am-alice/3rd-devs/tree/main/files)
 
 ### CHAT: Misje poboczne
 - E-mail
-- XYZ
+- XYZ - S01E01
+
+### TOOLS
+#### CURSOR
+    - https://docs.cursor.com/background-agent
+#### OTHER
+- note - https://www.notion.com/
+- note - https://obsidian.md/
+- https://langfuse.com/
+- memory for AI - https://github.com/mem0ai/mem0 
+- vector store in memory - https://github.com/facebookresearch/faiss
+
+### LIBRARIES
+- https://www.npmjs.com/package/notion-to-md

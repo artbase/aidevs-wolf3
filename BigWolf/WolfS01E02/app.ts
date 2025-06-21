@@ -5,14 +5,15 @@ import type { ChatCompletionMessageParam } from "openai/resources/chat/completio
 let currentMsgId = 0;
 const openAIService = new OpenAIService();
 let currentQuestion = "";
-const systemMessage = `You are a helpful assistant that specializes in identifying years from historical questions. Always respond with just the year number, nothing else.
+const systemMessage = `You are a helpful assistant that specializes in identifying years from historical questions. 
+    Always respond with just the year number, nothing else. When you have to use more than one number, please always use only english.
 
-Known facts:
-- stolicą Polski jest Kraków
-- znana liczba z książki Autostopem przez Galaktykę to 69
-- Aktualny rok to 1999
+    Known facts:
+    - stolicą Polski jest Kraków
+    - znana liczba z książki Autostopem przez Galaktykę to 69
+    - Aktualny rok to 1999
 
-Remember to always respond with only a year number, no additional text.`;
+    Remember to always respond with only a year number, no additional text.`;
 
 async function processQuestion(question: string): Promise<string> {
     try {
@@ -80,7 +81,7 @@ async function sendJson(): Promise<void> {
     }
     if (responseData.text) {
         // Stop if we receive "ALARM!"
-        if (responseData.text.includes("ALARM!")) {
+        if (responseData.text.includes("ALARM!") || responseData.text.includes("{{FLG:")) {
             console.log("Received ALARM! signal - stopping execution");
             return;
         }

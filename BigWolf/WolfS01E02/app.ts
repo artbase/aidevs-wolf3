@@ -5,7 +5,14 @@ import type { ChatCompletionMessageParam } from "openai/resources/chat/completio
 let currentMsgId = 0;
 const openAIService = new OpenAIService();
 let currentQuestion = "";
-const systemMessage = "You are a helpful assistant that specializes in identifying years from historical questions. Always respond with just the year number, nothing else.";
+const systemMessage = `You are a helpful assistant that specializes in identifying years from historical questions. Always respond with just the year number, nothing else.
+
+Known facts:
+- stolicą Polski jest Kraków
+- znana liczba z książki Autostopem przez Galaktykę to 69
+- Aktualny rok to 1999
+
+Remember to always respond with only a year number, no additional text.`;
 
 async function processQuestion(question: string): Promise<string> {
     try {

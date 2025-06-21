@@ -41,6 +41,11 @@ async function sendJson(): Promise<void> {
         currentMsgId = responseData.msgID;
     }
     if (responseData.text) {
+        // Stop if we receive "ALARM!"
+        if (responseData.text === "ALARM!") {
+            console.log("Received ALARM! signal - stopping execution");
+            return;
+        }
         currentQuestion = responseData.text;
         // If there's more to process, call sendJson again
         await sendJson();

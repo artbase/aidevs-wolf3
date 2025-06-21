@@ -21,6 +21,12 @@ async function sendJson(): Promise<void> {
         msgID: currentMsgId
     };
 
+    // Log outgoing message
+    console.log("\n=== SENDING MESSAGE ===");
+    console.log("Message ID:", data.msgID);
+    console.log("Text:", data.text);
+    console.log("=====================\n");
+
     const response = await fetch('https://xyz.ag3nts.org/verify', {
         method: 'POST',
         headers: {
@@ -34,7 +40,11 @@ async function sendJson(): Promise<void> {
     }
 
     const responseData = await response.json();
-    console.log("Response message:", responseData);
+    
+    // Log incoming message
+    console.log("\n=== RECEIVED MESSAGE ===");
+    console.log("Response data:", responseData);
+    console.log("======================\n");
     
     // Update msgID and question for next iteration
     if (responseData.msgID !== undefined) {

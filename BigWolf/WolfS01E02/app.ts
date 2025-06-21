@@ -19,6 +19,7 @@ async function sendJson(): Promise<void> {
     }
 
     console.log("JSON data sent successfully.");
+    console.log(response);
 }
 
 async function main(): Promise<void> {

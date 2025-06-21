@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "WolfS01E01": "bun WolfS01E01/app.ts",
+    "WolfS01E02": "bun WolfS01E02/app.ts",
     "WolfS02E01": "bun WolfS02E01/app.ts",
     "WolfS02E02": "bun WolfS02E02/app.ts",
     "WolfS02E03": "bun WolfS02E03/app.ts",

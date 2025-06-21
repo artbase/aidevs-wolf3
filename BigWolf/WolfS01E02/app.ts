@@ -52,7 +52,7 @@ async function sendJson(): Promise<void> {
     }
     if (responseData.text) {
         // Stop if we receive "ALARM!"
-        if (responseData.text === "ALARM!") {
+        if (responseData.text.includes("ALARM!")) {
             console.log("Received ALARM! signal - stopping execution");
             return;
         }

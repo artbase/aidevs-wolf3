@@ -1,5 +1,28 @@
+import fetch from 'node-fetch';
+
+async function sendJson(): Promise<void> {
+    const data = {
+        text: "komunikat",
+        msgID: 0123456789
+    };
+
+    const response = await fetch('https://xyz.ag3nts.org/verify', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    console.log("JSON data sent successfully.");
+}
+
 async function main(): Promise<void> {
-    console.log("Hello, this is the main program for WolfS01E02.");
+    await sendJson();
 }
 
 main().catch(error => {

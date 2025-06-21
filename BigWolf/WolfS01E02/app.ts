@@ -18,6 +18,8 @@ async function sendJson(): Promise<void> {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
+    const responseData = await response.json();
+    console.log("Response message:", responseData);
     console.log("JSON data sent successfully.");
     console.log(response);
 }

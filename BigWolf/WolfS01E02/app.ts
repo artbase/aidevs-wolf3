@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 
 async function sendJson(): Promise<void> {
     const data = {
-        text: "komunikat",
-        msgID: 0123456789
+        text: "READY",
+        msgID: 0
     };
 
     const response = await fetch('https://xyz.ag3nts.org/verify', {

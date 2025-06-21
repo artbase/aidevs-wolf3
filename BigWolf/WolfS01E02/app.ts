@@ -21,7 +21,6 @@ async function sendJson(): Promise<void> {
     const responseData = await response.json();
     console.log("Response message:", responseData);
     console.log("JSON data sent successfully.");
-    console.log(response);
 }
 
 async function main(): Promise<void> {

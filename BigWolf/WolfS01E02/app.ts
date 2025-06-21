@@ -1,14 +1,35 @@
 import fetch from 'node-fetch';
 import { OpenAIService } from '../Services/OpenAIService';
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 let currentMsgId = 0;
 const openAIService = new OpenAIService();
 let currentQuestion = "";
+const systemMessage = "You are a helpful assistant that specializes in identifying years from historical questions. Always respond with just the year number, nothing else.";
 
 async function processQuestion(question: string): Promise<string> {
     try {
-        const year = await openAIService.getYearAnswer(question);
-        return year.toString();
+        const messages: ChatCompletionMessageParam[] = [
+            {
+                role: 'system',
+                content: systemMessage
+            },
+            {
+                role: 'user',
+                content: question
+            }
+        ];
+
+        const response = await openAIService.completion(
+            messages,
+            'gpt-4',
+            false,
+            false,
+            10
+        );
+
+        const answer = response.choices[0].message.content.trim();
+        return answer;
     } catch (error) {
         console.error("Error processing question:", error);
         throw error;

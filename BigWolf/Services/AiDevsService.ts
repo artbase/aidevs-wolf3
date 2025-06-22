@@ -61,4 +61,29 @@ export class AiDevsService {
       console.log('Data received from centrala.ag3nts.org:', data);
     }
   }
+
+  async SendAnswerWithObject(answer: object, task: string):  Promise<void> {
+    // Sending answer to central of agents
+    const requestMsg = {
+      "answer": answer,
+      "apikey": process.env.AIDEVS_API_KEY,
+      "task": task
+    };
+    console.log('Sending answer to central of agents:', requestMsg);
+    const response = await fetch(process.env.AIDEVS_CENTRAL_REPORT_URL || "", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestMsg)
+    });
+    if (!response.ok) {
+      const responseBody = await response.text();
+      console.error(`Response was not ok: ${response.statusText}. Response body: ${responseBody}`);
+    }
+    else {
+      const data = await response.json();
+      console.log('Data received from centrala.ag3nts.org:', data);
+    }
+  }
 }

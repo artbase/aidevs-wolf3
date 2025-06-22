@@ -2,6 +2,7 @@
 
 ```bash
 git log --graph --oneline --all --decorate
+git log -n 3
 
 npm run WolfS01E01
 ```
@@ -16,14 +17,21 @@ npm run WolfS01E01
 - [Rate Example](https://github.com/i-am-alice/3rd-devs/tree/main/rate)
 - [WebSearch](https://github.com/i-am-alice/3rd-devs/tree/main/websearch)
 
-#### Linki do doczytania:
-- https://www.anthropic.com/news/prompt-caching
-
 ### S01E02
 
 - [Completion-S00E04](https://github.com/i-am-alice/3rd-devs/tree/main/completion)
 - [Linear app](https://github.com/i-am-alice/3rd-devs/tree/main/linear)
 - [Files](https://github.com/i-am-alice/3rd-devs/tree/main/files)
+
+### S01E03
+Skonczylem na: Bazowe ograniczenia modeli
+
+- [Langfuse](https://github.com/i-am-alice/3rd-devs/tree/main/langfuse)
+- [Tiktokenizer](https://github.com/i-am-alice/3rd-devs/tree/main/tiktokenizer)
+- [Max tokens](https://github.com/i-am-alice/3rd-devs/tree/main/max_tokens)
+- [Constitution](https://github.com/i-am-alice/3rd-devs/tree/main/constitution)
+- [Completion-S00E04](https://github.com/i-am-alice/3rd-devs/tree/main/completion)
+
 
 ### CHAT: Misje poboczne
 - E-mail

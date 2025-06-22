@@ -2,6 +2,9 @@ import { WebService } from '../Services/WebService';
 import { OpenAIService } from '../Services/OpenAIService';
 import { AiDevsService } from '../Services/AiDevsService';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function getAIAnswer(openAIService: OpenAIService, question: string): Promise<string> {
     const messages: ChatCompletionMessageParam[] = [
@@ -36,14 +39,12 @@ async function main(): Promise<void> {
         const correctedAnswers = await Promise.all(jsonData['test-data'].map(async item => {
             const calculatedAnswer = eval(item.question);
             const result = {
-                ...item,
-                originalAnswer: item.answer
+                ...item
             };
 
             // Handle math answer correction
             if (calculatedAnswer !== item.answer) {
                 result.answer = calculatedAnswer;
-                result.wasFixed = true;
             }
 
             // Handle test questions if present
@@ -52,34 +53,20 @@ async function main(): Promise<void> {
                 result.test = {
                     ...item.test,
                     a: aiAnswer,
-                    wasAnswered: true
                 };
+                console.log('AI answer:', aiAnswer);
             }
 
             return result;
         }));
 
-        // Prepare the final JSON with corrections
-        const finalJson = {
+        const finalJSON = {
             ...jsonData,
-            'test-data': correctedAnswers
+            'test-data': correctedAnswers,
+            'apikey': process.env.AIDEVS_API_KEY
         };
-
         // Send the answer to AiDevs
-        await aiDevsService.SendAnswer(JSON.stringify(finalJson), 'JSON');
-
-        // Log results
-        const incorrectMathAnswers = correctedAnswers.filter(item => item.wasFixed);
-        const answeredTests = correctedAnswers.filter(item => item.test?.wasAnswered);
-        
-        console.log('Found and corrected these math answers:', incorrectMathAnswers);
-        console.log('Number of math corrections made:', incorrectMathAnswers.length);
-        
-        console.log('\nAnswered these test questions:', answeredTests.map(item => ({
-            question: item.test.q,
-            answer: item.test.a
-        })));
-        console.log('Number of test questions answered:', answeredTests.length);
+        await aiDevsService.SendAnswerWithObject(finalJSON, 'JSON');
         
     } catch (error) {
         console.error('Error occurred:', error);

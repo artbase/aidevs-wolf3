@@ -12,8 +12,14 @@ async function main(): Promise<void> {
         const jsonContent = await webService.fetchPageContent(url);
 
         const jsonData = JSON.parse(jsonContent);
-        const firstTestData = jsonData['test-data'][0];
-        console.log('First test data:', firstTestData);
+        const incorrectAnswers = jsonData['test-data'].filter(item => {
+            // Safely evaluate the mathematical expression
+            const calculatedAnswer = eval(item.question);
+            return calculatedAnswer !== item.answer;
+        });
+
+        console.log('Incorrect answers:', incorrectAnswers);
+        console.log('Number of incorrect answers:', incorrectAnswers.length);
         
     } catch (error) {
         console.error('Error occurred:', error);

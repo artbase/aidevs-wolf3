@@ -18,8 +18,8 @@ async function main(): Promise<void> {
                 return {
                     ...item,
                     originalAnswer: item.answer,  // keep track of original incorrect answer
-                    answer: calculatedAnswer,     // provide correct answer
-                    wasFixed: true               // flag to indicate this was corrected
+                    //answer: calculatedAnswer,     // provide correct answer
+                    //wasFixed: true               // flag to indicate this was corrected
                 };
             }
             return item;

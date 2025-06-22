@@ -4,9 +4,9 @@ async function main(): Promise<void> {
     const webService = new WebService();
     
     try {
-        const url = process.env.JSON_URL || '';
+        const url = process.env.JSON_URL_S01E03 || '';
         if (!url) {
-            throw new Error('JSON_URL environment variable is not set');
+            throw new Error('JSON_URL_S01E03 environment variable is not set');
         }
 
         const jsonContent = await webService.fetchPageContent(url);

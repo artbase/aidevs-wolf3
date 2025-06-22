@@ -10,16 +10,25 @@ async function main(): Promise<void> {
         }
 
         const jsonContent = await webService.fetchPageContent(url);
-
         const jsonData = JSON.parse(jsonContent);
-        const incorrectAnswers = jsonData['test-data'].filter(item => {
-            // Safely evaluate the mathematical expression
+        
+        const correctedAnswers = jsonData['test-data'].map(item => {
             const calculatedAnswer = eval(item.question);
-            return calculatedAnswer !== item.answer;
+            if (calculatedAnswer !== item.answer) {
+                return {
+                    ...item,
+                    originalAnswer: item.answer,  // keep track of original incorrect answer
+                    answer: calculatedAnswer,     // provide correct answer
+                    wasFixed: true               // flag to indicate this was corrected
+                };
+            }
+            return item;
         });
 
-        console.log('Incorrect answers:', incorrectAnswers);
-        console.log('Number of incorrect answers:', incorrectAnswers.length);
+        const incorrectAnswers = correctedAnswers.filter(item => item.wasFixed);
+        
+        console.log('Found and corrected these answers:', incorrectAnswers);
+        console.log('Number of corrections made:', incorrectAnswers.length);
         
     } catch (error) {
         console.error('Error occurred:', error);

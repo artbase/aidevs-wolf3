@@ -10,7 +10,10 @@ async function main(): Promise<void> {
         }
 
         const jsonContent = await webService.fetchPageContent(url);
-        console.log('Downloaded JSON content:', jsonContent);
+
+        const jsonData = JSON.parse(jsonContent);
+        const firstTestData = jsonData['test-data'][0];
+        console.log('First test data:', firstTestData);
         
     } catch (error) {
         console.error('Error occurred:', error);

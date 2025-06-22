@@ -46,10 +46,10 @@ async function main(): Promise<void> {
 
             // Handle test questions if present
             if (item.test && item.test.q && item.test.a === "???") {
-                const aiAnswer = await getAIAnswer(openAIService, item.test.q);
+                //const aiAnswer = await getAIAnswer(openAIService, item.test.q);
                 result.test = {
                     ...item.test,
-                    a: aiAnswer,
+                    //a: aiAnswer,
                     wasAnswered: true
                 };
             }

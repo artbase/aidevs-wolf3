@@ -1,5 +1,6 @@
 import { WebService } from '../Services/WebService';
 import { OpenAIService } from '../Services/OpenAIService';
+import { AiDevsService } from '../Services/AiDevsService';
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 async function getAIAnswer(openAIService: OpenAIService, question: string): Promise<string> {
@@ -21,6 +22,7 @@ async function getAIAnswer(openAIService: OpenAIService, question: string): Prom
 async function main(): Promise<void> {
     const webService = new WebService();
     const openAIService = new OpenAIService();
+    const aiDevsService = new AiDevsService();
     
     try {
         const url = process.env.JSON_URL_S01E03 || '';
@@ -46,10 +48,10 @@ async function main(): Promise<void> {
 
             // Handle test questions if present
             if (item.test && item.test.q && item.test.a === "???") {
-                //const aiAnswer = await getAIAnswer(openAIService, item.test.q);
+                const aiAnswer = await getAIAnswer(openAIService, item.test.q);
                 result.test = {
                     ...item.test,
-                    //a: aiAnswer,
+                    a: aiAnswer,
                     wasAnswered: true
                 };
             }
@@ -57,6 +59,16 @@ async function main(): Promise<void> {
             return result;
         }));
 
+        // Prepare the final JSON with corrections
+        const finalJson = {
+            ...jsonData,
+            'test-data': correctedAnswers
+        };
+
+        // Send the answer to AiDevs
+        await aiDevsService.SendAnswer(JSON.stringify(finalJson), 'JSON');
+
+        // Log results
         const incorrectMathAnswers = correctedAnswers.filter(item => item.wasFixed);
         const answeredTests = correctedAnswers.filter(item => item.test?.wasAnswered);
         

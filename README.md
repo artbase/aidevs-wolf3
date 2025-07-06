@@ -24,7 +24,6 @@ npm run WolfS01E01
 - [Files](https://github.com/i-am-alice/3rd-devs/tree/main/files)
 
 ### S01E03
-Skonczylem na: Bazowe ograniczenia modeli
 
 - [Langfuse](https://github.com/i-am-alice/3rd-devs/tree/main/langfuse)
 - [Tiktokenizer](https://github.com/i-am-alice/3rd-devs/tree/main/tiktokenizer)
@@ -32,6 +31,10 @@ Skonczylem na: Bazowe ograniczenia modeli
 - [Constitution](https://github.com/i-am-alice/3rd-devs/tree/main/constitution)
 - [Completion-S00E04](https://github.com/i-am-alice/3rd-devs/tree/main/completion)
 
+### S01E04
+- [Memory](https://github.com/i-am-alice/3rd-devs/tree/main/memory)
+
+Skonczylem na filmiku i wspomnieniu o memory
 
 ### CHAT: Misje poboczne
 - E-mail
